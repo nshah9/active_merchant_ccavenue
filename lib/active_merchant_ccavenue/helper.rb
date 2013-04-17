@@ -7,7 +7,12 @@ module ActiveMerchant #:nodoc:
                     mapping :order, 'Order_Id'
                     mapping :customer, :name  => 'billing_cust_name',
                       :email      => 'billing_cust_email',
-                      :phone      => 'billing_cust_tel'
+                      :phone      => 'billing_cust_tel',
+                      :city       => 'billing_city',
+                      :state      => 'billing_cust_state',
+                      :country    => 'delivery_cust_country',
+                      :address    => 'billing_cust_address',
+                      :zip        => 'billing_zip'
 
                     def redirect(mapping = {})
                         add_field 'Redirect_Url', mapping[:return_url]
