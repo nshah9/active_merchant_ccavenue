@@ -8,10 +8,10 @@ module ActiveMerchant #:nodoc:
                     mapping :customer, :name  => 'billing_cust_name',
                       :email      => 'billing_cust_email',
                       :phone      => 'billing_cust_tel',
+                      :address    => 'billing_cust_address',
                       :city       => 'billing_city',
                       :state      => 'billing_cust_state',
-                      :country    => 'delivery_cust_country',
-                      :address    => 'billing_cust_address',
+                      :country    => 'billing_cust_country',
                       :zip        => 'billing_zip'
 
                     def redirect(mapping = {})
