@@ -9,10 +9,10 @@ module ActiveMerchant #:nodoc:
                       :email      => 'billing_cust_email',
                       :phone      => 'billing_cust_tel',
                       :address    => 'billing_cust_address',
-                      :city       => 'billing_city',
+                      :city       => 'billing_cust_city',
                       :state      => 'billing_cust_state',
                       :country    => 'billing_cust_country',
-                      :zip        => 'billing_zip'
+                      :zip        => 'billing_cust_zip'
 
                     def redirect(mapping = {})
                         add_field 'Redirect_Url', mapping[:return_url]
