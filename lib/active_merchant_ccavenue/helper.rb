@@ -5,14 +5,23 @@ module ActiveMerchant #:nodoc:
                 class Helper < ActiveMerchant::Billing::Integrations::Helper
                     mapping :amount, 'Amount'
                     mapping :order, 'Order_Id'
-                    mapping :customer, :name  => 'billing_cust_name',
+                    mapping :billing_address, :name  => 'billing_cust_name',
                       :email      => 'billing_cust_email',
                       :phone      => 'billing_cust_tel',
                       :address    => 'billing_cust_address',
                       :city       => 'billing_cust_city',
                       :state      => 'billing_cust_state',
                       :country    => 'billing_cust_country',
-                      :zip        => 'billing_cust_zip'
+                      :zip        => 'billing_cust_zip',
+                      :notes      => 'billing_cust_notes'
+
+                    mapping :delivery_address, :name  => 'delivery_cust_name',
+                            :phone      => 'delivery_cust_tel',
+                            :address    => 'delivery_cust_address',
+                            :city       => 'delivery_cust_city',
+                            :state      => 'delivery_cust_state',
+                            :country    => 'delivery_cust_country',
+                            :zip        => 'delivery_cust_zip'
 
                     def redirect(mapping = {})
                         add_field 'Redirect_Url', mapping[:return_url]

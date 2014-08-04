@@ -22,3 +22,8 @@ rdoc
 pkg
 
 ## PROJECT::SPECIFIC
+.DS_Store
+**/.DS_Store
+.idea
+.idea/
+
