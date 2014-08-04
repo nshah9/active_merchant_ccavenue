@@ -12,7 +12,7 @@ module ActiveMerchant #:nodoc:
                       :city       => 'billing_cust_city',
                       :state      => 'billing_cust_state',
                       :country    => 'billing_cust_country',
-                      :zip        => 'billing_cust_zip',
+                      :zip        => 'billing_zip_code',
                       :notes      => 'billing_cust_notes'
 
                     mapping :delivery_address, :name  => 'delivery_cust_name',
@@ -21,7 +21,7 @@ module ActiveMerchant #:nodoc:
                             :city       => 'delivery_cust_city',
                             :state      => 'delivery_cust_state',
                             :country    => 'delivery_cust_country',
-                            :zip        => 'delivery_cust_zip'
+                            :zip        => 'delivery_zip_code'
 
                     def redirect(mapping = {})
                         add_field 'Redirect_Url', mapping[:return_url]
