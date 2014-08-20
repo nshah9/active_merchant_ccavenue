@@ -48,19 +48,34 @@ Once you've configured ActiveMerchantCcavenue, you need a checkout action; my vi
       :amount => @order.price,
       :currency => 'INR',
       :service => :ccavenue do |service| %>    
-    <%  service.customer :name => current_user.name,
-               :email => current_user.email,
-               :phone => current_user.mobile %>    
+    <%  service.billing_address :name => @order.billing_address.name,
+                         :email => @order.user.email,
+                         :phone => @order.billing_address.phone,
+                         :address    => @order.billing_address.address_line1 + ' ' + @order.billing_address.address_line2,
+                         :city       => @order.billing_address.city,
+                         :state      => @order.billing_address.state,
+                         :country    => @order.billing_address.country,
+                         :zip        => @order.billing_address.pincode
+    %>
+
+    <%  service.delivery_address(:name => @order.shipping_address.name,
+                                :phone => @order.shipping_address.phone,
+                                :address    => @order.shipping_address.address_line1 + ' ' + @order.shipping_address.address_line2,
+                                :city       => @order.shipping_address.city,
+                                :state      => @order.shipping_address.state,
+                                :country    => @order.shipping_address.country,
+                                :zip        => @order.shipping_address.pincode) unless @order.same_address
+    %>
     <%  service.redirect :return_url => confirm_order_url(@order) %>
     <%= submit_tag 'Proceed to payment' %>
   <% end %>
 
 You also need a return or confirmation action; my action looks like:
 
-  @notification = ActiveMerchant::Billing::Integrations::Ccavenue::Notification.new(request.raw_post)
+  @notification = ActiveMerchant::Billing::Integrations::Ccavenue::Notification.new(params[:encResponse])
   if @notification.payment_id.present?
     @order = Order.find_by_order_id(@notification.payment_id)
-    if @notification.complete? and @notification.valid?
+    if @notification.complete? and @notification.valid? and @order.id == Order.find(@notification.payment_id).id  and @order.price == BigDecimal.new(@notification.gross)
       @order.confirm!
     else
       @order.reject!
