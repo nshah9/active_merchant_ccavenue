@@ -3,6 +3,14 @@ module ActiveMerchant #:nodoc:
         module Integrations #:nodoc:
             module Ccavenue
                 class Notification < ActiveMerchant::Billing::Integrations::Notification
+                    attr_accessor :params
+
+                    def parse(encResponse)
+                      ccavutil = File.expand_path('../ccavutil.jar', __FILE__)
+                      params = %x[java -jar ccavutil #{ActiveMerchant::Billing::Integrations::Ccavenue.work_key} "#{encResponse}" dec]
+                      self.params = Rack::Utils.parse_nested_query(params)
+                    end
+
                     def valid?
                         verify_checksum(
                             self.security_key,
@@ -38,7 +46,7 @@ module ActiveMerchant #:nodoc:
                     def status
                         params['AuthDesc']
                     end
-                    
+
                     private
 
                     def verify_checksum(checksum, *args)
