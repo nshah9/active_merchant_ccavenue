@@ -7,7 +7,7 @@ module ActiveMerchant #:nodoc:
 
                     def parse(encResponse)
                       ccavutil = File.expand_path('../ccavutil.jar', __FILE__)
-                      params = %x[java -jar ccavutil #{ActiveMerchant::Billing::Integrations::Ccavenue.work_key} "#{encResponse}" dec]
+                      params = %x[java -jar #{ccavutil} #{ActiveMerchant::Billing::Integrations::Ccavenue.work_key} "#{encResponse}" dec]
                       self.params = Rack::Utils.parse_nested_query(params)
                     end
 
