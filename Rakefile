@@ -5,8 +5,8 @@ begin
     require 'jeweler'
     Jeweler::Tasks.new do |gem|
         gem.name = 'active_merchant_ccavenue'
-        gem.summary = %Q{ActiveMerchantCCAvenue}
-        gem.description = %Q{CCAvenue integration for ActiveMerchant}
+        gem.summary = %Q{OffsitePaymentsCCAvenue}
+        gem.description = %Q{CCAvenue integration for OffsitePayments}
         gem.email = 'contact@meshbrain.com'
         gem.homepage = 'http://github.com/meshbrain/active_merchant_ccavenue'
         gem.authors = ['Suman Debnath']
